@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -16,8 +16,10 @@ model Membro {
   sobrenome String
   data_nasc DateTime
   email String
+  password String
   telefone String?
   data_criacao DateTime
+  status Int @default(1)
   treinos TreinosOnMembros[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime? @updatedAt
