@@ -42,6 +42,6 @@ export class MembroService {
       }
      })
 
-     
+      return membro;
   }
 }

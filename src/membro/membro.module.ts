@@ -5,5 +5,6 @@ import { MembroController } from './membro.controller';
 @Module({
   controllers: [MembroController],
   providers: [MembroService],
+  exports:[MembroService]
 })
 export class MembroModule {}

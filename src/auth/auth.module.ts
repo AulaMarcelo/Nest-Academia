@@ -4,11 +4,13 @@ import { JwtModule } from '@nestjs/jwt';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { LocalStrategy } from './strategies/local.strategy';
+import { MembroModule } from 'src/membro/membro.module';
 
 
 @Module({
- 
-  providers: [AuthService],
+  imports:[MembroModule],
+  providers: [AuthService,LocalStrategy],
   exports: [AuthService],
   controllers: [AuthController],
 })
