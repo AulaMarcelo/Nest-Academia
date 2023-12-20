@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Membro {
+  id String @id @default(uuid())
+  nome String 
+  sobrenome String
+  data_nasc DateTime
+  email String
+  telefone String?
+  data_criacao DateTime
+  treinos TreinosOnMembros[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime? @updatedAt
+
+  @@map("membro")
+}
+
+model Instrutor {
+  id String @id @default(uuid())
+  nome String 
+  sobrenome String
+  especialidade String
+  aulas Aulas[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime? @updatedAt
+  @@map("instrutor")
+}
+
+model Treino{
+   id String @id @default(uuid())
+   nome String 
+   descricao String
+   dificuldade Int
+   membros TreinosOnMembros[]
+   status Int @default(0)
+   createdAt     DateTime  @default(now())
+   updatedAt     DateTime? @updatedAt
+
+  @@map("treino")
+}
+
+model Exercicio{
+   id String @id @default(uuid())
+   nome String 
+   descricao String
+   url String?
+   avaliacao Int
+   status Int @default(0)
+   createdAt     DateTime  @default(now())
+   updatedAt     DateTime? @updatedAt
+
+  @@map("exercicio")
+}
+
+model TreinosOnMembros{
+    
+    membro      Membro     @relation(fields: [membroId], references: [id])
+    membroId    String 
+    treino      Treino     @relation(fields: [treinoId], references: [id])
+    treinoId    String 
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime? @updatedAt
+    @@id([membroId, treinoId])
+
+    @@map("treinos_on_membros")
+}
+
+model Aulas{
+   id String @id @default(uuid())
+   nome String 
+   descricao String
+   data_aula DateTime
+   status Int @default(0)
+   instrutor Instrutor @relation(fields: [instrutorId],references: [id])
+   instrutorId String
+   createdAt     DateTime  @default(now())
+   updatedAt     DateTime? @updatedAt
+
+  @@map("aula")
+}
