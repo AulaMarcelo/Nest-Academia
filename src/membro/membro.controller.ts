@@ -15,4 +15,9 @@ export class MembroController {
   async findall(){
      return await this.membroService.findAll();
   }
+
+  @Get()
+  async findbyemail(email:string){
+     return await this.membroService.findbyemail(email);
+  }
 }

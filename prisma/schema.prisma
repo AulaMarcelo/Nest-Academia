@@ -15,7 +15,7 @@ model Membro {
   nome String 
   sobrenome String
   data_nasc DateTime
-  email String
+  email String  @unique
   password String
   telefone String?
   data_criacao DateTime

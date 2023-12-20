@@ -34,4 +34,14 @@ export class MembroService {
     return membros;
   }
 
+
+  async findbyemail(email:string){
+     const membro= await this.prisma.membro.findUnique({
+      where:{
+        email
+      }
+     })
+
+     
+  }
 }
