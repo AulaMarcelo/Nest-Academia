@@ -9,7 +9,10 @@ import { MembroModule } from 'src/membro/membro.module';
 
 
 @Module({
-  imports:[MembroModule],
+  imports:[MembroModule,JwtModule.register({
+    secret:process.env.JWT_SECRET,
+    signOptions:{expiresIn:'1d'},
+  })],
   providers: [AuthService,LocalStrategy],
   exports: [AuthService],
   controllers: [AuthController],
