@@ -1,8 +1,9 @@
-import { Controller, HttpCode, HttpStatus, Post, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, HttpCode, HttpStatus, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthRequest } from './models/auth-request';
 import { IsPublic } from './decorators/is-public.decorator';
+import { CurrentUser } from './decorators/current-user.decorator';
 
 @Controller()
 export class AuthController {
@@ -15,6 +16,11 @@ export class AuthController {
   login(@Request() req :AuthRequest){
     console.log(req.user)
     return this.authService.login(req.user);
+  }
+
+  @Get()
+  getMe(@CurrentUser() user){
+     return user;
   }
   
 
