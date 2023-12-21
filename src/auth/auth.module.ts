@@ -6,6 +6,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './strategies/local.strategy';
 import { MembroModule } from 'src/membro/membro.module';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 
 @Module({
@@ -13,7 +14,7 @@ import { MembroModule } from 'src/membro/membro.module';
     secret:process.env.JWT_SECRET,
     signOptions:{expiresIn:'1d'},
   })],
-  providers: [AuthService,LocalStrategy],
+  providers: [AuthService,LocalStrategy,JwtStrategy],
   exports: [AuthService],
   controllers: [AuthController],
 })
